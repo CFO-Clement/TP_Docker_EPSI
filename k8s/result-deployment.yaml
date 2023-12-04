@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - name: result
+        image: 1b2a1ae3df11f4f5a3eeb3c613c2ac7461f3da8b804a0d4bbd20e27de402ca7e #Local docker image for result

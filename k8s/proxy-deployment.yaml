@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy
+  template:
+    metadata:
+      labels:
+        app: proxy
+    spec:
+      containers:
+      - name: proxy
+        image: f22e76b5ad09adc5f91578b6f2bfb81ea2d2c155add4cf9ba913c6ac74c859fc #Local docker image for proxy

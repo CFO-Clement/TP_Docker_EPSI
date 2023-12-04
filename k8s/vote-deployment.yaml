@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - name: vote
+        image: 987e2da850bdf58831a96d03a41cfcc6ed20ce02d87c0c3a76553e7a2044fea1 #Local docker image for vote

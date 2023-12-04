@@ -1,0 +1,53 @@
+version: '3'
+services:
+  proxy:
+    build: ./proxy
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+
+  vote:
+    build: ./vote
+    container_name: vote
+    networks:
+      - frontend
+      - backend
+
+  result:
+    build: ./result
+    container_name: results
+    ports:
+      - "5858:5858"
+    networks:
+      - frontend
+      - backend
+
+  worker:
+    build: ./worker
+    networks:
+      - backend
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
